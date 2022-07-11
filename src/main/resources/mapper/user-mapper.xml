@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.springstudy.mapper.UserMapper">
+    <resultMap id="userListMap" type="com.example.springstudy.model.UserDetailRes$InnerUserList">
+        <id property="userSequence" column="USER_SEQ"/>
+        <id property="userId" column="USER_ID"/>
+        <id property="userPassword" column="USER_PWD"/>
+        <id property="userName" column="USER_NAME"/>
+        <id property="userEmail" column="USER_EMAIL"/>
+        <id property="userCreateDate" column="CRT_DT"/>
+    </resultMap>
+
+    <select id="selectUserList" resultMap="userListMap">
+        SELECT
+            USER_SEQ,
+            USER_NAME,
+            USER_ID,
+            USER_EMAIL,
+            CRT_DT
+        FROM USER_TABLE
+    </select>
+
+    <insert id="insertJoinUser" parameterType="userDetailReq">
+        INSERT INTO USER_TABLE(
+               USER_ID
+              , USER_PWD
+              , USER_NAME
+              , USER_EMAIL
+              , CRT_DT
+          ) VALUES (
+            #{userId}
+            , #{userPassword}
+            , #{userName}
+            , #{userEmail}
+            , CURRENT_TIMESTAMP()
+          )
+    </insert>
+
+    <select id="selectByUserNameDuplicated" resultType="int">
+        SELECT COUNT(*)
+        FROM USER_TABLE
+        WHERE USER_NAME = #{userName}
+    </select>
+
+    <select id="getUserAccount" resultType="com.example.springstudy.model.UserLoginReq">
+        SELECT * FROM USER_TABLE
+        WHERE USER_EMAIL = #{userEmail}
+    </select>
+</mapper>
