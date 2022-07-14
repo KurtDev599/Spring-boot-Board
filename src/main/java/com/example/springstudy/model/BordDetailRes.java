@@ -7,12 +7,15 @@ import java.util.Date;
 
 @Getter
 @Setter
-public class BordModel {
+public class BordDetailRes {
     // 게시글 일련변호
     private int bordSequence;
 
     // 게시글 작성자 일련번호
     private int userSequence;
+
+    // 게시글 작성자 이름
+    private String userName;
 
     // 게시글 제목
     private String bordTitle;

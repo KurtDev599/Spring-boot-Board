@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.example.springstudy.mapper.BordMapper">
+    <resultMap id="bordListMap" type="com.example.springstudy.model.BordDetailRes">
+        <id  property="bordSequence" column="BORD_SEQ"/>
+        <id property="userSequence" column="USER_SEQ" />
+        <id property="userName" column="USER_NM" />
+        <id property="bordTitle" column="BORD_TIT" />
+        <id property="bordContent" column="BORD_CNT" />
+        <id property="bordCreateDateTime" column="CRT_DT" />
+    </resultMap>
+
+    <insert id="registerBord">
+    INSERT INTO BORD_TABLE(
+        USER_SEQ
+        , USER_NM
+        , BORD_TIT
+        , BORD_CNT
+        , CRT_DT
+    ) VALUE (
+        #{userSequence}
+        , #{userName}
+        , #{bordTitle}
+        , #{bordContent}
+        , CURRENT_TIMESTAMP()
+    )
+    </insert>
+
+</mapper>
